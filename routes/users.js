@@ -27,17 +27,28 @@ const db = admin.firestore();
 
 
 router.get('/data', async(req, res)=> {
-    var x;
-    const doc = await db.collection("users").orderBy("timestamp", "desc");
-    const observer = doc.onSnapshot(docSnapshot => {
-        console.log(`Received doc snapshot: ${docSnapshot}`);
-        console.log("reached x");
-        for(i in docSnapshot){
-            res.json(docSnapshot[i]);
-        }
-        }, err => {
-        console.log(`Encountered error: ${err}`);
+    console.log("fetching data");
+    const all = await db.collection('users').orderBy("timestamp", "desc");
+    // const observer = doc.onSnapshot(docSnapshot => {
+    //     console.log(`Received doc snapshot: ${docSnapshot}`);
+    //     console.log("reached x");
+    //     for(i in docSnapshot){
+    //         res.json(docSnapshot[i]);
+    //     }
+    //     }, err => {
+    //     console.log(`Encountered error: ${err}`);
+    // });
+    const snapshot = await all.get().then((querySnapshot) => {
+        var docs = querySnapshot.docs.map(doc => doc.data());
+        res.json(docs);
     });
+
+    // let response=[];
+    // snapshot.forEach(doc => {
+    //     response.push(doc.data());
+    //     // console.log(doc.id, '=>', doc.data());
+    // });
+    // res.json(response);
 
 
 });

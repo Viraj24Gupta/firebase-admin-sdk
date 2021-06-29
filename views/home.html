@@ -6,10 +6,34 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Admin_View</title>
     <link rel="stylesheet" href="../public/stylesheets/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
 </head>
 <body>
-<table>
-    <tr><th>NAME</th><th>SELFIE</th><th>AADHAR</th><th>VERIFIED</th></tr>
-</table>
+<div class="user">
+    <table class="new">
+        <tr style="font-size: 20px"><th>NAME</th><th>SELFIE</th><th>AADHAR</th><th>VERIFIED</th></tr>
+    </table>
+</div>
+
+<script>
+    fetch('http://localhost:1234/data')
+        .then(response => response.text())
+        .then(result => {
+            var data = JSON.parse(result);
+            // console.log(data);
+            appendData(data)
+        })
+        .catch(error => console.log('error', error));
+    function appendData(data) {
+        for(x in data) {
+            let row = `
+               <tr><th>${data[x].fullName}</th><th>SELFIE</th><th>AADHAR</th><th>${data[x].Verify}</th></tr>
+            `;
+            // console.log(data[x].fullName);
+            // console.log(row);
+            $('table.new').append(row);
+        }
+    }
+</script>
 </body>
 </html>
