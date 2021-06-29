@@ -38,7 +38,7 @@ router.get('/data', async(req, res)=> {
     //     }, err => {
     //     console.log(`Encountered error: ${err}`);
     // });
-    const snapshot = await all.get().then((querySnapshot) => {
+    const snapshot1 = await all.get().then((querySnapshot) => {
         var docs = querySnapshot.docs.map(doc => doc.data());
         res.json(docs);
     });
@@ -52,5 +52,39 @@ router.get('/data', async(req, res)=> {
 
 
 });
+
+
+router.get('/id',async(req,res)=>{
+    const all = await db.collection('users').orderBy("timestamp", "desc");
+    const snapshot1 = await all.get().then((querySnapshot) => {
+        var docs = querySnapshot.docs.map(doc => doc.id);
+        res.json(docs);
+    });
+});
+
+
+// router.get('/storage', async(req,res)=>{
+//     const storageBucket = admin.storage().bucket( 'gs://krib2downgrade-1.appspot.com' );
+//     const getRemoteImages = async() => {
+//         const imagePromises = posts.map( (item, index) => admin
+//             .firestore().collection('AADHAR CARD').get().then(querySnapshot => {
+//                 // querySnapshot is an array but I only want the first instance in this case
+//                 const docRef = querySnapshot.docs[0];
+//                 // the property "url" was what I called the property that holds the name of the file in the "posts" database
+//                 const fileName = docRef.data().url;
+//                 return storageBucket.file( fileName ).getSignedUrl({
+//                     action: "read",
+//                     expires: '03-17-2025' // this is an arbitrary date
+//                 })
+//             })
+//             // chained promise because "getSignedUrl()" returns a promise
+//             .then((data) => data[0])
+//             .catch(err => console.log('Error getting document', err))
+//         )
+//         // returns an array of remote image paths
+//         const imagePaths = await Promise.all(imagePromises);
+//         return imagePaths
+//     }
+// });
 
 module.exports = router;

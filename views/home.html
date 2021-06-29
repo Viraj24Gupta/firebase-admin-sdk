@@ -11,29 +11,43 @@
 <body>
 <div class="user">
     <table class="new">
-        <tr style="font-size: 20px"><th>NAME</th><th>SELFIE</th><th>AADHAR</th><th>VERIFIED</th></tr>
+        <tr style="font-size: 20px"><th>NAME</th><th>SELFIE</th><th>AADHAR NO.</th><th>VERIFIED</th></tr>
     </table>
 </div>
 
 <script>
+    var data;
+    var id;
     fetch('http://localhost:1234/data')
         .then(response => response.text())
         .then(result => {
-            var data = JSON.parse(result);
-            // console.log(data);
-            appendData(data)
-        })
-        .catch(error => console.log('error', error));
-    function appendData(data) {
+            data = JSON.parse(result);
+            console.log(data);
+            paas(data)
+        }).catch(error => console.log('error', error));
+
+    fetch('http://localhost:1234/id')
+        .then(response => response.text())
+        .then(result => {
+            id = JSON.parse(result);
+            console.log(id);
+            paas(id)
+        }).catch(error => console.log('error', error));
+
+    function paas() {
+        append(data,id)
+    }
+    function append(data,id) {
         for(x in data) {
             let row = `
-               <tr><th>${data[x].fullName}</th><th>SELFIE</th><th>AADHAR</th><th>${data[x].Verify}</th></tr>
+               <tr><th>${data[x].fullName}</th><th>SELFIE</th><th>AADHAR</th><th><button id="${id[x]}" onclick="change()"></button></th></tr>
             `;
-            // console.log(data[x].fullName);
-            // console.log(row);
+
             $('table.new').append(row);
         }
     }
+
 </script>
+<script type="text/javascript" src="../public/javascripts/change.js"></script>
 </body>
 </html>
