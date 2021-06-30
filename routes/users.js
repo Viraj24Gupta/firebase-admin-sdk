@@ -67,8 +67,11 @@ router.get('/id',async(req,res)=>{
 });
 
 router.post('/change',async(req,res)=>{
+    var ad_num= req.body.ad_num;
     var clicked_id= req.body.changed;
+    console.log(ad_num);
     console.log(clicked_id);
+    db.collection('users').doc(clicked_id).update({ aadharNumber: ad_num });
     db.collection('users').doc(clicked_id).update({ Verify: "Yes" });
     res.sendFile(path.join(__dirname, '../views/home.html'));
 });

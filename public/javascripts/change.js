@@ -22,7 +22,7 @@ function paas() {
 function append(data,id) {
     for(x in data) {
         let row = `
-               <tr id="${id[x]}" ><th>${data[x].fullName}</th><th>SELFIE</th><th>AADHAR</th><th>${data[x].Verify}&nbsp;&nbsp;<button type="submit" name="changed" value="${id[x]}">change</button></th></tr>
+               <tr id="${id[x]}" ><td>${data[x].fullName}</td><td>SELFIE</td><td>CARD</td><td><input form="form${x}" type="text" name="ad_num" required/></td><td>${data[x].Verify}<form id="form${x}" method="post" action="/change"><button type="submit" name="changed" value="${id[x]}">verify</button></form></td></tr>
             `;
 
         $('table.new').append(row);
