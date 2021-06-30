@@ -1,6 +1,10 @@
 var express = require('express');
 var router = express.Router();
 let admin = require('firebase-admin');
+let bodyParser = require('body-parser');
+const path = require('path');
+
+router.use(express.static(path.join(__dirname,'./')));
 // let dotenv = require('dotenv').config();
 // let FirebaseConfig = {
 //     type: process.env.type,
@@ -23,7 +27,7 @@ admin.initializeApp({
 });
 
 const db = admin.firestore();
-
+router.use(bodyParser.urlencoded({extended: false}));
 
 
 router.get('/data', async(req, res)=> {
@@ -62,6 +66,12 @@ router.get('/id',async(req,res)=>{
     });
 });
 
+router.post('/change',async(req,res)=>{
+    var clicked_id= req.body.changed;
+    console.log(clicked_id);
+    db.collection('users').doc(clicked_id).update({ Verify: "Yes" });
+    res.sendFile(path.join(__dirname, '../views/home.html'));
+});
 
 // router.get('/storage', async(req,res)=>{
 //     const storageBucket = admin.storage().bucket( 'gs://krib2downgrade-1.appspot.com' );
