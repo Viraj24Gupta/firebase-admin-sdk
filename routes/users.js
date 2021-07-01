@@ -5,20 +5,6 @@ let bodyParser = require('body-parser');
 const path = require('path');
 
 router.use(express.static(path.join(__dirname,'./')));
-// let dotenv = require('dotenv').config();
-// let FirebaseConfig = {
-//     type: process.env.type,
-//     project_id: process.env.project_id,
-//     private_key_id: process.env.private_key_id,
-//     private_key: process.env.private_key,
-//     client_email: process.env.client_email,
-//     client_id: process.env.client_id,
-//     auth_uri: process.env.auth_uri,
-//     token_uri: process.env.token_uri,
-//     auth_provider_x509_cert_url: process.env.auth_provider_x509_cert_url,
-//     client_x509_cert_url: process.env.client_x509_cert_url
-// };
-// admin.initializeApp(FirebaseConfig);
 
 const serviceAccount = require('../key.json');
 
@@ -75,6 +61,24 @@ router.post('/change',async(req,res)=>{
     db.collection('users').doc(clicked_id).update({ Verify: "Yes" });
     res.redirect("/home");
 });
+
+router.post("/", async(req,res)=>{
+    console.log("POST signin");
+    const user = req.body.username;
+    const pass = req.body.password;
+    const snapshot = await db.collection('admin').get();
+    snapshot.forEach((doc) => {
+        // console.log(doc.data().username);
+        if(doc.data().password == pass && doc.data().username == user){
+            // req.session.currentUser = user;
+            res.redirect("/home");
+        }
+        else{
+            res.sendFile(path.join(__dirname, '../views/err.html'));
+        }
+    });
+});
+
 
 // router.get('/storage', async(req,res)=>{
 //     const storageBucket = admin.storage().bucket( 'gs://krib2downgrade-1.appspot.com' );

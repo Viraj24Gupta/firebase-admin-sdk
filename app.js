@@ -1,56 +1,69 @@
 let express = require('express');
-// const redis = require('redis');
-// let session = require('express-session');
 let path = require('path');
-let app = express();
-
+// let session = require('express-session');
+// let redis = require('redis');
 // let RedisStore = require('connect-redis')(session);
 // let redisClient = redis.createClient();
-//
+
+let app = express();
+let users = require ('./routes/users');
+
+
 // app.use(session({
+//     name: "user_id",
 //     store: new RedisStore({
-//         client: redisClient
+//         client: redisClient,
+//         disableTouch: true
 //     }),
+//     cookie:{
+//         maxAge: 1000 * 60 * 60 * 24 * 365 * 10, //10years
+//         httpOnly: true,
+//         sameSite: 'lax'
+//     },
 //     saveUninitialized: false,
 //     secret: 'super secret',
 //     resave: false,
 // }));
-let users = require ('./routes/users');
+
 
 app.use('/',users);
 app.use("/public", express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname,'./')));
 
-app.get('/', function(req,res){
+app.get("/", function(req,res){
     console.log('GET signin');
     res.sendFile(path.join(__dirname, '/views/signin.html'));
 });
-app.get("/signin", function(req,res){
-    console.log("GET signin");
-    res.sendFile(path.join(__dirname,'/views/signin.html'))
-});
-app.get('/home', function(req,res){
-    console.log('GET home');
-    res.sendFile(path.join(__dirname, '/views/home.html'));
-});
-// app.post("/signin", function(req,res){
+
+// app.post("/", function(req,res){
 //     console.log("POST signin");
-//     firebase.database().ref("users/"+req.body.username).once('value')
-//         .then(function(snapshot){
-//             console.log(snapshot.val());
+//     const user = req.body.username;
+//     const pass = req.body.password;
+//
+//     firebase.database().ref("users/"+user).once('value').then(function(snapshot){
+//             // console.log(snapshot.val());
 //             if(snapshot.val()==null){
-//                 res.send("check username/password")
+//                 alert("null");
 //             }
-//             else if(snapshot.val().password != req.body.password){
-//                 res.send("check username/password")
+//             else if(snapshot.val().password != pass){
+//                 alert("check password");
 //             }
-//             else if((snapshot.val().password == req.body.password) && (snapshot.val().username == req.body.username)){
-//                 res.sendFile((path.join(__dirname,'./templates/about.html')))
+//             else if((snapshot.val().password == pass) && (snapshot.val().username == user)){
+//                 req.session.currentUser = user;
+//                 res.redirect("/home");
 //             }
 //         })
 // });
 
+app.get('/home', function(req,res){
+    console.log('GET home');
+    res.sendFile(path.join(__dirname, '/views/home.html'));
+});
 
+app.get("/logout", (req, res) => {
+    // req.session.destroy();
+    res.redirect("/");
+});
 
 app.listen(1234,()=>{
     console.log("http://localhost:1234");
