@@ -73,7 +73,7 @@ router.post('/change',async(req,res)=>{
     console.log(clicked_id);
     db.collection('users').doc(clicked_id).update({ aadharNumber: ad_num });
     db.collection('users').doc(clicked_id).update({ Verify: "Yes" });
-    res.sendFile(path.join(__dirname, '../views/home.html'));
+    res.redirect("/home");
 });
 
 // router.get('/storage', async(req,res)=>{

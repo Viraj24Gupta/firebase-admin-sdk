@@ -1,5 +1,6 @@
 body {
     padding: 10px;
+    user-select: none;
     font: 16px "Century Gothic", Helvetica, Arial, sans-serif;
 }
 table{
@@ -7,19 +8,38 @@ table{
     border-collapse: collapse;
 }
 td,th{
-    border: 1px solid #dddddd;
+    border-bottom: 1px solid #dddddd;
     text-align: center;
     padding: 8px;
 }
-tr:nth-child(odd){
+tr:nth-child(1){
     background-color: #dddddd;
 }
 #myInput{
     margin: 5px 5px auto;
     text-align: center;
+    border-radius: 10px;
+    border: 1px solid black;
+    font-size: 20px;
+    outline: none;
 }
 .srch{
     padding: 10px 10px;
     text-align: center;
     margin: auto;
+}
+.logout{
+    margin-right: 3%;
+    margin-left: -10%;
+    float: right;
+    padding: 4px;
+    border-radius: 10px;
+    border: 1px solid black;
+    font-size: 20px;
+    text-decoration:none;
+    color: black;
+}
+.logout:hover{
+    background-color: darkslategray;
+    color: white;
 }
