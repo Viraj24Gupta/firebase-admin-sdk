@@ -4,7 +4,7 @@ let session = require('express-session');
 let redis = require('redis');
 let RedisStore = require('connect-redis')(session);
 let redisClient = redis.createClient();
-
+require("dotenv/config");
 let app = express();
 let users = require ('./routes/users');
 
@@ -21,7 +21,7 @@ app.use(session({
         sameSite: 'lax'
     },
     saveUninitialized: false,
-    secret: 'secret',
+    secret: process.env.secret,
     resave: false,
 }));
 

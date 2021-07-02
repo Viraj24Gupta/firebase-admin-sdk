@@ -12,6 +12,9 @@ td,th{
     padding: 8px;
 }
 tr:nth-child(1){
+    background-color: darkgrey!important;
+}
+tr:nth-child(odd){
     background-color: #dddddd;
 }
 #myInput{
