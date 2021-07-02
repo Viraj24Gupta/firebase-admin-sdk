@@ -70,11 +70,11 @@ router.post("/", async(req,res)=>{
     snapshot.forEach((doc) => {
         // console.log(doc.data().username);
         if(doc.data().password == pass && doc.data().username == user){
-            // req.session.currentUser = user;
+            req.session.currentUser = user;
             res.redirect("/home");
         }
         else{
-            res.sendFile(path.join(__dirname, '../views/err.html'));
+            res.render('err',{msg: 'WRONG USERNAME OR PASSWORD',path:'/signin'});
         }
     });
 });
