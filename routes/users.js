@@ -66,17 +66,15 @@ router.post("/", async(req,res)=>{
     console.log("POST signin");
     const user = req.body.username;
     const pass = req.body.password;
-    const snapshot = await db.collection('admin').get();
+    const snapshot = await db.collection("admin").where("username", "==", user).get();
     snapshot.forEach((doc) => {
         // console.log(doc.data().username);
         if(doc.data().password == pass && doc.data().username == user){
             req.session.currentUser = user;
             res.redirect("/home");
         }
-        else{
-            res.render('err',{msg: 'WRONG USERNAME OR PASSWORD',path:'/signin'});
-        }
     });
+    res.render('err',{msg: 'WRONG USERNAME OR PASSWORD',path:'/signin'});
 });
 
 
