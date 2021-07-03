@@ -14,10 +14,25 @@ const storage = admin.storage();
 router.use(bodyParser.urlencoded({extended: false}));
 router.use(express.static(path.join(__dirname,'./')));
 
+var filter;
+router.post('/data', async(req, res)=>{
+    filter = req.body.filter;
+    res.redirect('/home');
+});
+
 router.get('/data', async(req, res)=> {
     console.log("fetching data");
-    const all = await db.collection('users').orderBy("timestamp", "desc");
-    const snapshot1 = await all.get().then((querySnapshot) => {
+    var all;
+    if(filter === "all"){
+        all = await db.collection('users');
+    }
+    else if(filter === "yes"){
+        all = await db.collection('users').where("Verify", "==", "Yes");
+    }
+    else{
+        all = await db.collection('users').where("Verify", "==", "No");
+    }
+    const snapshot1 = await all.orderBy("timestamp", "desc").get().then((querySnapshot) => {
         var docs = querySnapshot.docs.map(doc => doc.data());
         res.json(docs);
     });

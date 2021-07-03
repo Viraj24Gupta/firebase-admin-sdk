@@ -35,7 +35,7 @@ app.get("/", function(req,res){
     }
     else {
         console.log('GET');
-        res.sendFile(path.join(__dirname, '/views/signin.html'));
+        res.sendFile(path.join(__dirname, '/views/directories.html'));
     }
 });
 
