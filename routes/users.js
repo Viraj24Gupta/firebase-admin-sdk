@@ -24,13 +24,13 @@ router.get('/data', async(req, res)=> {
     console.log("fetching data");
     var all;
     if(filter === "all"){
-        all = await db.collection('users');
+        all = db.collection('users');
     }
     else if(filter === "yes"){
-        all = await db.collection('users').where("Verify", "==", "Yes");
+        all = db.collection('users').where("Verify", "==", "Yes");
     }
     else{
-        all = await db.collection('users').where("Verify", "==", "No");
+        all = db.collection('users').where("Verify", "==", "No");
     }
     const snapshot1 = await all.orderBy("timestamp", "desc").get().then((querySnapshot) => {
         var docs = querySnapshot.docs.map(doc => doc.data());
@@ -39,8 +39,17 @@ router.get('/data', async(req, res)=> {
 });
 
 router.get('/id',async(req,res)=>{
-    const all = await db.collection('users').orderBy("timestamp", "desc");
-    const snapshot1 = await all.get().then((querySnapshot) => {
+    var all;
+    if(filter === "all"){
+        all = db.collection('users');
+    }
+    else if(filter === "yes"){
+        all = db.collection('users').where("Verify", "==", "Yes");
+    }
+    else{
+        all = db.collection('users').where("Verify", "==", "No");
+    }
+    const snapshot1 = await all.orderBy("timestamp", "desc").get().then((querySnapshot) => {
         var docs = querySnapshot.docs.map(doc => doc.id);
         res.json(docs);
     });
