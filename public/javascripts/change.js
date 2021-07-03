@@ -17,16 +17,16 @@ function append() {
         let row = `
                <tr id="${id[x]}" >
                     <td>${s}</td>
-                    <td>${data[x].fullName}</td>
+                    <td class="bold">${data[x].fullName}</td>
                     <td>${data[x].username}</td>
-                    <td>${data[x].gender}</td>
-                    <td>${data[x].dob}</td>
+                    <td class="bold">${data[x].gender}</td>
+                    <td class="bold">${data[x].dob}</td>
                     <td><img src="${data[x].selfieUrl}" width="250px" alt="selfie-img" onclick="window.open(this.src, '_blank');" ></td>
                     <td><img  src="${data[x].aadharUrl}" width="250px" alt="DELETED" onclick="window.open(this.src, '_blank');"/></td>
                     <td><input form="form${x}" type="text" class="ad_num" name="ad_num" required/>${data[x].aadharNumber}
                         <br/><input form="form${x}" name="ad_url" type="checkbox" value="${data[x].aadharUrl}">Delete aadhar card image</button></td>
-                    <td>${data[x].Verify}<form id="form${x}" method="post" action="/change">
-                        <button type="submit" class="verify-btn" name="changed" value="${id[x]}">verify</button></form></td>
+                    <td><form id="form${x}" method="post" action="/change">
+                        <button type="submit" class="verify-btn" name="changed" value="${id[x]}">verify</button></form>${data[x].Verify}</td>
                </tr>
             `;
         s++;
