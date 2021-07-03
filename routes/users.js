@@ -35,9 +35,9 @@ router.post('/change',async(req,res)=>{
     var ad_num= req.body.ad_num;
     var ad_url= req.body.ad_url;
     var clicked_id= req.body.changed;
-    console.log(ad_num);
-    console.log(ad_url);
-    console.log(clicked_id);
+    // console.log(ad_num);
+    // console.log(ad_url);
+    // console.log(clicked_id);
     db.collection('users').doc(clicked_id).update({ aadharNumber: ad_num });
     db.collection('users').doc(clicked_id).update({ Verify: "Yes" });
     if(typeof ad_url != "undefined"){
