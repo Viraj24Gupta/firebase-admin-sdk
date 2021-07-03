@@ -15,7 +15,7 @@ router.use(bodyParser.urlencoded({extended: false}));
 router.use(express.static(path.join(__dirname,'./')));
 
 var filter;
-router.post('/data', async(req, res)=>{
+router.post('/filter_value', async(req, res)=>{
     filter = req.body.filter;
     res.redirect('/home');
 });

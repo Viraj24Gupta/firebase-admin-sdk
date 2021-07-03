@@ -61,7 +61,7 @@ app.get("/logout", (req, res) => {
 });
 
 app.all('*', function (req,res) {
-   res.render('err',{msg: 'ACCESS DENIED',path: '/'});
+   res.render('err',{msg: 'ACCESS DENIED',path: '/home'});
 });
 
 app.listen(1234,()=>{
