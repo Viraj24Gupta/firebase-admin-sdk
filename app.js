@@ -44,13 +44,23 @@ app.get('/signin', function(req,res){
     res.sendFile(path.join(__dirname, '/views/signin.html'));
 });
 
-app.get('/home', function(req,res){
+app.get('/verification', function(req,res){
     if (!req.session.currentUser){
         res.render('err',{msg: 'LOGIN TOH KARLE', path: '/signin'});
     }
     else {
         console.log('GET home');
-        res.sendFile(path.join(__dirname, '/views/home.html'));
+        res.sendFile(path.join(__dirname, '/views/verification.html'));
+    }
+});
+
+app.get('/feedback', function(req,res){
+    if (!req.session.currentUser){
+        res.render('err',{msg: 'LOGIN TOH KARLE', path: '/signin'});
+    }
+    else {
+        console.log('GET home');
+        res.sendFile(path.join(__dirname, '/views/feedback.html'));
     }
 });
 
@@ -61,7 +71,7 @@ app.get("/logout", (req, res) => {
 });
 
 app.all('*', function (req,res) {
-   res.render('err',{msg: 'ACCESS DENIED',path: '/home'});
+   res.render('err',{msg: 'ACCESS DENIED',path: '/'});
 });
 
 app.listen(1234,()=>{

@@ -17,7 +17,7 @@ router.use(express.static(path.join(__dirname,'./')));
 var filter;
 router.post('/filter_value', async(req, res)=>{
     filter = req.body.filter;
-    res.redirect('/home');
+    res.redirect('/verification');
 });
 
 router.get('/data', async(req, res)=> {
@@ -68,10 +68,10 @@ router.post('/change',async(req,res)=>{
         await storage.bucket("krib2downgrade-1.appspot.com").file("AADHAR CARD/"+clicked_id+".jpg").delete();
         db.collection('users').doc(clicked_id).update({ aadharUrl: null });
     }
-    res.redirect("/home");
+    res.redirect("/verification");
 });
 
-router.post("/", async(req,res)=>{
+router.post("/signin", async(req,res)=>{
     console.log("POST signin");
     const user = req.body.username;
     const pass = req.body.password;
@@ -80,7 +80,7 @@ router.post("/", async(req,res)=>{
         // console.log(doc.data().username);
         if(doc.data().password == pass && doc.data().username == user){
             req.session.currentUser = user;
-            res.redirect("/home");
+            res.redirect("/");
         }
     });
     res.render('err',{msg: 'WRONG USERNAME OR PASSWORD',path:'/signin'});

@@ -19,7 +19,7 @@ tr:nth-child(1){
 tr:nth-child(odd){
     background-color: #dddddd;
 }
-#myInput{
+.myInput{
     margin: 5px 5px auto;
     text-align: center;
     border-radius: 10px;
@@ -31,6 +31,21 @@ tr:nth-child(odd){
     padding: 10px 10px;
     text-align: center;
     margin: auto;
+}
+.goto_link{
+    margin-right: -10%;
+    margin-left: 3%;
+    float: left;
+    padding: 4px;
+    border-radius: 10px;
+    border: 1px solid black;
+    font-size: 20px;
+    text-decoration:none;
+    color: black;
+}
+.goto_link:hover{
+    background-color: #374045;
+    color: white;
 }
 .logout{
     margin-right: 3%;

@@ -1,0 +1,24 @@
+*{
+    padding:0 auto;
+    margin:0 auto;
+    box-sizing: border-box;
+}
+body {
+    margin: 75px 50px;
+    text-align: center;
+    background-color: #374045;
+    color: white;
+    font-size: 35px;
+    font-family: "Century Gothic", sans-serif !important;
+}
+a{
+    float: left;
+    text-decoration:none;
+    color: cornflowerblue;
+}
+a:hover{
+    color: black;
+}
+li{
+    margin: 10px auto;
+}

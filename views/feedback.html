@@ -11,23 +11,18 @@
 </head>
 <body>
 <div class="srch">
-    <h1>VERIFICATION PAGE</h1>
-    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="SEARCH">
+    <h1>FEEDBACK PAGE</h1>
+    <a class="goto_link" href="/">HOME PAGE</a>
+    <input type="text" CLASS="myInput" id="myInput1" onkeyup="myFunction1()" placeholder="SEARCH">
     <a class="logout" href="/logout">Log Out</a>
-    <p>
-    <form action="/filter_value" method="POST">
-        <button name="filter" type="submit" value="all">ALL</button>
-        <button name="filter" type="submit" value="yes">YES</button>
-        <button name="filter" type="submit" value="no">NO</button>
-    </form>
-</div>
-<div class="user" id="user">
-        <table class="new">
-            <tr style="font-size: 20px"><th>S. NO.</th><th>NAME</th><th>USERNAME</th><th>GENDER</th><th>D.O.B</th><th>SELFIE</th><th>AADHAR CARD</th><th>AADHAR NO.</th><th>VERIFIED</th></tr>
-        </table>
 </div>
 
-<script src="../public/javascripts/change.js"></script>
+<div class="user" id="user">
+    <table class="new">
+        <tr style="font-size: 25px"><th>S. NO.</th><th>NAME</th><th>USERNAME</th><th>GENDER</th><th>D.O.B</th><th>SELFIE</th><th>AADHAR CARD</th><th>AADHAR NO.</th><th>VERIFIED</th></tr>
+    </table>
+</div>
+
 <script src="../public/javascripts/search.js"></script>
 </body>
 </html>

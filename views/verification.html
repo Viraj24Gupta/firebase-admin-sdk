@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ADMIN ACCESS</title>
+    <link rel="icon" type="image/svg+xml" href="../public/images/favicon.svg">
+    <link rel="stylesheet" href="../public/stylesheets/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="srch">
+    <h1>VERIFICATION PAGE</h1>
+    <a class="goto_link" href="/">HOME PAGE</a>
+    <input type="text" CLASS="myInput" id="myInput" onkeyup="myFunction()" placeholder="SEARCH">
+    <a class="logout" href="/logout">Log Out</a>
+    <p>
+    <form action="/filter_value" method="POST">
+        <button name="filter" type="submit" value="all">ALL</button>
+        <button name="filter" type="submit" value="yes">YES</button>
+        <button name="filter" type="submit" value="no">NO</button>
+    </form>
+</div>
+<div class="user" id="user">
+        <table class="new">
+            <tr style="font-size: 25px"><th>S. NO.</th><th>NAME</th><th>USERNAME</th><th>GENDER</th><th>D.O.B</th><th>SELFIE</th><th>AADHAR CARD</th><th>AADHAR NO.</th><th>VERIFIED</th></tr>
+        </table>
+</div>
+
+<script src="../public/javascripts/change.js"></script>
+<script src="../public/javascripts/search.js"></script>
+</body>
+</html>
