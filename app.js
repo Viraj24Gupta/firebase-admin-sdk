@@ -49,8 +49,8 @@ app.get('/verification', function(req,res){
         res.render('err',{msg: 'LOGIN TOH KARLE', path: '/signin'});
     }
     else {
-        console.log('GET home');
-        res.sendFile(path.join(__dirname, '/views/verification.html'));
+        console.log('GET verification');
+        res.render('verification');
     }
 });
 
@@ -59,15 +59,20 @@ app.get('/feedback', function(req,res){
         res.render('err',{msg: 'LOGIN TOH KARLE', path: '/signin'});
     }
     else {
-        console.log('GET home');
-        res.sendFile(path.join(__dirname, '/views/feedback.html'));
+        console.log('GET feedback');
+        res.render('feedback');
     }
 });
 
 app.get("/logout", (req, res) => {
-    req.session.destroy();
-    console.log("logout");
-    res.redirect("/signin");
+    if (!req.session.currentUser){
+        res.render('err',{msg: 'ALREADY LOGGED OUT', path: '/signin'});
+    }
+    else {
+        req.session.destroy();
+        console.log("logout");
+        res.redirect("/signin");
+    }
 });
 
 app.all('*', function (req,res) {

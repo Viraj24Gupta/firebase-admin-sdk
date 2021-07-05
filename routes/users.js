@@ -75,15 +75,19 @@ router.post("/signin", async(req,res)=>{
     console.log("POST signin");
     const user = req.body.username;
     const pass = req.body.password;
+    var x=0;
     const snapshot = await db.collection("admin").where("username", "==", user).get();
     snapshot.forEach((doc) => {
         // console.log(doc.data().username);
         if(doc.data().password == pass && doc.data().username == user){
             req.session.currentUser = user;
             res.redirect("/");
+            x = 1;
         }
     });
-    res.render('err',{msg: 'WRONG USERNAME OR PASSWORD',path:'/signin'});
+    if(x === 0){
+        res.render('err',{msg: 'WRONG USERNAME OR PASSWORD',path:'/signin'});
+    }
 });
 
 module.exports = router;
