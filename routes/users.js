@@ -4,7 +4,7 @@ let admin = require('firebase-admin');
 let bodyParser = require('body-parser');
 require("dotenv/config");
 const path = require('path');
-const serviceAccount = require('../key.json');
+const serviceAccount = require('../key_1.json');
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount)
@@ -88,6 +88,68 @@ router.post("/signin", async(req,res)=>{
     if(x === 0){
         res.render('err',{msg: 'WRONG USERNAME OR PASSWORD',path:'/signin'});
     }
+});
+
+router.get("/allid",async (req,res)=>{
+    await db.collection('users').get().then((querySnapshot) => {
+        var docs = querySnapshot.docs.map(doc => doc.id);
+        res.json(docs);
+    });
+});
+
+router.get("/feeds",async(req,res)=>{
+
+    var ids=[],c=0;
+    await db.collection('users').get().then((querySnapshot) => {
+        var docs = querySnapshot.docs.map(doc => doc.id);
+        ids.push(docs);
+        c=docs.length;
+    });
+    // console.log(ids);
+    // console.log(c);
+
+    var data11={};
+    for (let i=0;i<c;i++){
+        var all = await db.collection("feedback").doc(ids[0][i]).listCollections()
+            .then((subCollections)=>{
+                subCollections.forEach((subCollections)=>{
+                    subCollections.orderBy("timestamp", "desc").get().then((querySnapshot) => {
+                        // console.log(docs);
+                        data11[ids[0][i]] = querySnapshot.docs.map(doc => doc.data());
+                    });
+                })
+            });
+    }
+    res.json(data11);
+    // console.log(data11);
+});
+
+router.get("/supps",async(req,res)=>{
+
+    var ids=[],c=0;
+    await db.collection('users').get().then((querySnapshot) => {
+        var docs = querySnapshot.docs.map(doc => doc.id);
+        ids.push(docs);
+        c=docs.length;
+    });
+    // console.log(ids);
+    // console.log(c);
+
+    var data21={};
+    for (let i=0;i<c;i++){
+        var all = await db.collection("supportRequests").doc(ids[0][i]).listCollections()
+            .then((subCollections)=>{
+                subCollections.forEach((subCollections)=>{
+                    subCollections.orderBy("timestamp", "desc").get().then((querySnapshot) => {
+                        // console.log(docs);
+                        data21[ids[0][i]] = querySnapshot.docs.map(doc => doc.data());
+                    });
+                })
+            });
+    }
+    res.json(data21);
+    // console.log(data21);
+
 });
 
 module.exports = router;

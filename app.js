@@ -64,6 +64,16 @@ app.get('/feedback', function(req,res){
     }
 });
 
+app.get('/support', function(req,res){
+    if (!req.session.currentUser){
+        res.render('err',{msg: 'LOGIN TOH KARLE', path: '/signin'});
+    }
+    else {
+        console.log('GET support');
+        res.render('support');
+    }
+});
+
 app.get("/logout", (req, res) => {
     if (!req.session.currentUser){
         res.render('err',{msg: 'ALREADY LOGGED OUT', path: '/signin'});

@@ -2,13 +2,13 @@ var data;
 var id;
 fetch('http://localhost:1234/data').then(response => response.text()).then(result => {
         data = JSON.parse(result);
-        console.log(data);
+        // console.log(data);
         append(data)
     }).catch(error => console.log('error', error));
 
 fetch('http://localhost:1234/id').then(response => response.text()).then(result => {
         id = JSON.parse(result);
-        console.log(id);
+        // console.log(id);
         append(id)
     }).catch(error => console.log('error', error));
 var s=1;
